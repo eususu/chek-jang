@@ -1,0 +1,30 @@
+{
+  "name": "novel-writing-server",
+  "version": "1.0.0",
+  "description": "소설 작성 기록 관리를 위한 개인용 REST API 서버",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
+    "test": "vitest --run",
+    "test:watch": "vitest"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "pg": "^8.20.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/pg": "^8.20.0",
+    "@types/supertest": "^7.2.0",
+    "fast-check": "^4.6.0",
+    "supertest": "^7.2.2",
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.4"
+  }
+}
