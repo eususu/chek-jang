@@ -4,7 +4,7 @@ import { ChapterService } from '../services/chapterService';
 export class ChapterController {
   constructor(private chapterService: ChapterService) {}
 
-  create = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  create = async (req: Request<{ novelId: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const novelId = parseInt(req.params.novelId, 10);
       const chapter = await this.chapterService.create(novelId, req.body);
@@ -14,7 +14,7 @@ export class ChapterController {
     }
   };
 
-  getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  getById = async (req: Request<{ novelId: string; id: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const novelId = parseInt(req.params.novelId, 10);
       const id = parseInt(req.params.id, 10);
@@ -25,7 +25,7 @@ export class ChapterController {
     }
   };
 
-  update = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  update = async (req: Request<{ novelId: string; id: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const novelId = parseInt(req.params.novelId, 10);
       const id = parseInt(req.params.id, 10);
@@ -36,7 +36,7 @@ export class ChapterController {
     }
   };
 
-  delete = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  delete = async (req: Request<{ novelId: string; id: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const novelId = parseInt(req.params.novelId, 10);
       const id = parseInt(req.params.id, 10);
@@ -47,7 +47,7 @@ export class ChapterController {
     }
   };
 
-  reorder = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  reorder = async (req: Request<{ novelId: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const novelId = parseInt(req.params.novelId, 10);
       const chapters = await this.chapterService.reorder(novelId, req.body.chapterIds);

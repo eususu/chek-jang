@@ -22,7 +22,7 @@ export class NovelController {
     }
   };
 
-  getById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  getById = async (req: Request<{ id: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = parseInt(req.params.id, 10);
       const novel = await this.novelService.findById(id);
@@ -32,7 +32,7 @@ export class NovelController {
     }
   };
 
-  update = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  update = async (req: Request<{ id: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = parseInt(req.params.id, 10);
       const novel = await this.novelService.update(id, req.body);
@@ -42,7 +42,7 @@ export class NovelController {
     }
   };
 
-  delete = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  delete = async (req: Request<{ id: string }>, res: Response, next: NextFunction): Promise<void> => {
     try {
       const id = parseInt(req.params.id, 10);
       await this.novelService.delete(id);
