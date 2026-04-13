@@ -69,3 +69,23 @@ export interface UpdateChapterInput {
 export interface ReorderChaptersInput {
   chapterIds: number[];
 }
+
+// 삽화 관련 타입
+export interface Illustration {
+  id: number;
+  chapterId: number;
+  imageUrl: string;
+  caption: string;
+  orderNum: number;
+  createdAt: string;
+}
+
+export interface CreateIllustrationInput {
+  imageUrl: string;
+  caption?: string;
+}
+
+export interface UpdateIllustrationInput {
+  imageUrl?: string;
+  caption?: string;
+}

@@ -93,6 +93,21 @@ export class Database {
     await this.pool.query(`
       CREATE INDEX IF NOT EXISTS idx_chapters_order ON chapters(novel_id, order_num)
     `);
+
+    await this.pool.query(`
+      CREATE TABLE IF NOT EXISTS illustrations (
+        id SERIAL PRIMARY KEY,
+        chapter_id INTEGER NOT NULL REFERENCES chapters(id) ON DELETE CASCADE,
+        image_url VARCHAR(2000) NOT NULL,
+        caption VARCHAR(500) NOT NULL DEFAULT '',
+        order_num INTEGER NOT NULL,
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )
+    `);
+
+    await this.pool.query(`
+      CREATE INDEX IF NOT EXISTS idx_illustrations_chapter_id ON illustrations(chapter_id)
+    `);
   }
 
   async close(): Promise<void> {

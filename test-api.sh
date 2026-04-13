@@ -122,6 +122,53 @@ res=$(call DELETE "/novels/${NOVEL_ID}/chapters/${CH3_ID}")
 check "챕터 삭제" 204 "$res" > /dev/null
 echo ""
 
+# ── 삽화 CRUD ────────────────────────────────
+echo -e "${YELLOW}▸ 삽화 CRUD${NC}"
+
+ILLUST_BASE="/novels/${NOVEL_ID}/chapters/${CH1_ID}/illustrations"
+
+res=$(call POST "$ILLUST_BASE" '{"imageUrl":"https://example.com/img1.png","caption":"첫 번째 삽화"}')
+body=$(check "삽화 1 생성" 201 "$res")
+IL1_ID=$(id_from "$body")
+echo "  → illustration_id = $IL1_ID"
+echo ""
+
+res=$(call POST "$ILLUST_BASE" '{"imageUrl":"https://example.com/img2.png"}')
+body=$(check "삽화 2 생성 (캡션 없이)" 201 "$res")
+IL2_ID=$(id_from "$body")
+echo "  → illustration_id = $IL2_ID"
+echo ""
+
+res=$(call GET "$ILLUST_BASE")
+check "삽화 목록 조회" 200 "$res" > /dev/null
+echo ""
+
+res=$(call GET "${ILLUST_BASE}/${IL1_ID}")
+check "삽화 상세 조회" 200 "$res" > /dev/null
+echo ""
+
+res=$(call PUT "${ILLUST_BASE}/${IL1_ID}" '{"caption":"수정된 캡션"}')
+check "삽화 수정" 200 "$res" > /dev/null
+echo ""
+
+res=$(call DELETE "${ILLUST_BASE}/${IL2_ID}")
+check "삽화 삭제" 204 "$res" > /dev/null
+echo ""
+
+# ── 삽화 에러 케이스 ─────────────────────────
+echo -e "${YELLOW}▸ 삽화 에러 케이스${NC}"
+
+res=$(call POST "$ILLUST_BASE" '{"imageUrl":"not-a-url"}')
+check "잘못된 URL → 400" 400 "$res" > /dev/null
+echo ""
+
+res=$(call GET "/novels/${NOVEL_ID}/chapters/99999/illustrations")
+check "존재하지 않는 챕터 삽화 조회 → 404" 404 "$res" > /dev/null
+echo ""
+
+# ── 전체 삭제 ────────────────────────────────
+echo -e "${YELLOW}▸ 전체 삭제${NC}"
+
 res=$(call DELETE "/novels/${NOVEL_ID}")
 check "소설 삭제 (cascade)" 204 "$res" > /dev/null
 echo ""
