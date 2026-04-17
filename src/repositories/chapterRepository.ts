@@ -59,7 +59,7 @@ export class ChapterRepository {
     return row ? toChapter(row) : null;
   }
 
-  async update(novelId: number, chapterId: number, data: { title?: string; content?: string }): Promise<Chapter | null> {
+  async update(novelId: number, chapterId: number, data: { title?: string; content?: string; orderNum?: number }): Promise<Chapter | null> {
     const fields: string[] = [];
     const params: unknown[] = [];
     let paramIndex = 1;
@@ -71,6 +71,10 @@ export class ChapterRepository {
     if (data.content !== undefined) {
       fields.push(`content = $${paramIndex++}`);
       params.push(data.content);
+    }
+    if (data.orderNum !== undefined) {
+      fields.push(`order_num = $${paramIndex++}`);
+      params.push(data.orderNum);
     }
 
     if (fields.length === 0) {

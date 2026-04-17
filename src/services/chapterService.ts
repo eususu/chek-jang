@@ -16,12 +16,12 @@ export class ChapterService {
     if (!novel) {
       throw new NotFoundError('소설');
     }
-    const maxOrder = await this.chapterRepo.getMaxOrder(novelId);
+    const orderNum = data.orderNum ?? (await this.chapterRepo.getMaxOrder(novelId)) + 1;
     return this.chapterRepo.insert({
       novelId,
       title: data.title,
       content: data.content,
-      orderNum: maxOrder + 1,
+      orderNum,
     });
   }
 

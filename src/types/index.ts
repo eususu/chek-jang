@@ -59,11 +59,13 @@ export interface ChapterSummary {
 export interface CreateChapterInput {
   title: string;
   content?: string;
+  orderNum?: number;
 }
 
 export interface UpdateChapterInput {
   title?: string;
   content?: string;
+  orderNum?: number;
 }
 
 export interface ReorderChaptersInput {
