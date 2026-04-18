@@ -59,7 +59,7 @@ export interface ChapterSummary {
 export interface CreateChapterInput {
   title: string;
   content?: string;
-  orderNum?: number;
+  orderNum: number;
 }
 
 export interface UpdateChapterInput {

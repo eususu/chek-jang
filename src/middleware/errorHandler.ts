@@ -23,5 +23,6 @@ export function errorHandler(
     return;
   }
 
+  console.error('Unhandled error:', err);
   res.status(500).json({ error: '서버 내부 오류가 발생했습니다' });
 }

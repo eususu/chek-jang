@@ -20,7 +20,7 @@ export class ChapterService {
       novelId,
       title: data.title,
       content: data.content,
-      orderNum: data.orderNum,
+      orderNum: data.orderNum
     });
   }
 
