@@ -4,7 +4,7 @@
 # 사용법: ./test-api.sh
 #
 
-BASE_URL="http://localhost:3000"
+BASE_URL="http://localhost:2009"
 TOKEN="your_auth_token_here"
 
 # 색상
@@ -82,19 +82,19 @@ echo ""
 # ── 챕터 CRUD ────────────────────────────────
 echo -e "${YELLOW}▸ 챕터 CRUD${NC}"
 
-res=$(call POST "/novels/${NOVEL_ID}/chapters" '{"title":"1장: 시작","content":"옛날 옛적에..."}')
+res=$(call POST "/novels/${NOVEL_ID}/chapters" '{order_num: 1, "title":"1장: 시작","content":"옛날 옛적에..."}')
 body=$(check "챕터 1 생성" 201 "$res")
 CH1_ID=$(id_from "$body")
 echo "  → chapter_id = $CH1_ID"
 echo ""
 
-res=$(call POST "/novels/${NOVEL_ID}/chapters" '{"title":"2장: 전개","content":"그러던 어느 날..."}')
+res=$(call POST "/novels/${NOVEL_ID}/chapters" '{order_num: 2, "title":"2장: 전개","content":"그러던 어느 날..."}')
 body=$(check "챕터 2 생성" 201 "$res")
 CH2_ID=$(id_from "$body")
 echo "  → chapter_id = $CH2_ID"
 echo ""
 
-res=$(call POST "/novels/${NOVEL_ID}/chapters" '{"title":"3장: 결말","content":"그리고 행복하게 살았습니다."}')
+res=$(call POST "/novels/${NOVEL_ID}/chapters" '{order_num: 3, "title":"3장: 결말","content":"그리고 행복하게 살았습니다."}')
 body=$(check "챕터 3 생성" 201 "$res")
 CH3_ID=$(id_from "$body")
 echo "  → chapter_id = $CH3_ID"
