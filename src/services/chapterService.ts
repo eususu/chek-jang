@@ -19,6 +19,7 @@ export class ChapterService {
     return this.chapterRepo.insert({
       novelId,
       title: data.title,
+      source: data.source,
       content: data.content,
       orderNum: data.orderNum
     });

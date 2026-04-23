@@ -34,7 +34,7 @@ function toChapterSummary(row: ChapterRow): ChapterSummary {
 export class ChapterRepository {
   constructor(private db: Database) {}
 
-  async insert(data: { novelId: number; title: string; content?: string; orderNum: number }): Promise<Chapter> {
+  async insert(data: { novelId: number; title: string; source: string, content?: string; orderNum: number }): Promise<Chapter> {
     const content = data.content ?? '';
     const row = await this.db.get<ChapterRow>(
       'INSERT INTO chapters (novel_id, title, content, order_num) VALUES ($1, $2, $3, $4) RETURNING *',

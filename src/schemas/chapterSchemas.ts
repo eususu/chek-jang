@@ -3,6 +3,7 @@ import { z } from 'zod';
 
 export const createChapterSchema = z.object({
   title: z.string().min(1).max(200),
+  source: z.string(),
   content: z.string().optional(),
   orderNum: z.number().int().positive(),
 });

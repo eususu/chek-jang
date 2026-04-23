@@ -58,6 +58,7 @@ export interface ChapterSummary {
 
 export interface CreateChapterInput {
   title: string;
+  source: string;
   content?: string;
   orderNum: number;
 }
