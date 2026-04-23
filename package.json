@@ -8,7 +8,9 @@
     "start": "node dist/server.js",
     "dev": "tsx src/server.ts",
     "test": "vitest --run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "serve": "pm2 start --name 'chek-jang' --interpreter tsx src/server.ts",
+    "stop": "pm2 stop 'chek-jang'"
   },
   "keywords": [],
   "license": "ISC",

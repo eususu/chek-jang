@@ -34,11 +34,10 @@ function toChapterSummary(row: ChapterRow): ChapterSummary {
 export class ChapterRepository {
   constructor(private db: Database) {}
 
-  async insert(data: { novelId: number; title: string; source: string, content?: string; orderNum: number }): Promise<Chapter> {
-    const content = data.content ?? '';
+  async insert(data: { novelId: number; title: string; source: string, content: string; orderNum: number }): Promise<Chapter> {
     const row = await this.db.get<ChapterRow>(
-      'INSERT INTO chapters (novel_id, title, content, order_num) VALUES ($1, $2, $3, $4) RETURNING *',
-      [data.novelId, data.title, content, data.orderNum]
+      'INSERT INTO chapters (novel_id, title, source, content, order_num) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [data.novelId, data.title, data.source, data.content, data.orderNum]
     );
     return toChapter(row!);
   }
